@@ -20,13 +20,11 @@
 # #       Importar Librerías        # #
 #######################################
 
-## Librerías del sistema
+# Librerías del sistema
 import time  # Importamos la libreria time --> time.sleep
 from datetime import datetime
-import os  # Importamos la libreria para comandos de la consola/shell
-import random  # Genera números aleatorios --> random.randrange(1,100)
 
-## Librerías específicas
+# Librerías específicas
 from luma.led_matrix.device import max7219
 from luma.core.interface.serial import spi, noop
 from luma.core.virtual import viewport, sevensegment
@@ -121,7 +119,20 @@ class Sevensegment:
         else:
             print('Supera la longitud')
 
+    def brillo(self, n):
+        """
+        Ajusta el brillo de la pantalla al valor indicado. Este se convertirá a
+        hexadecimal por lo que el rango válido será desde 0-15.
+        :param n: Valor del brillo en rango de 0-15.
+        """
+        if n in range(16):
+            print('Ajustando Brillo a ' + str(n))
+            self.seg.device.contrast(n * 16)
+        else:
+            print('Valor de Brillo indicado no correcto, solo del 0-15')
 
+
+# Pruebas de la clase
 ss = Sevensegment()
 
 ss.fecha()
@@ -139,3 +150,12 @@ sleep(2)
 
 ss.mostrar('HOLA')
 sleep(2)
+
+ss.brillo(0)
+sleep(1)
+ss.brillo(5)
+sleep(1)
+ss.brillo(10)
+sleep(1)
+ss.brillo(15)
+sleep(1)
