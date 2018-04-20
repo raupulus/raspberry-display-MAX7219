@@ -45,6 +45,8 @@ sleep = time.sleep
 class Sevensegment:
 
     def __init__(self, c=1, p=0, d=0):
+        self.cascaded = c  # Cantidad de dispositivos en cascada
+
         self.serial = spi(port=p, device=d, gpio=noop())
         self.device = max7219(self.serial, cascaded=c)
         self.seg = sevensegment(self.device)
@@ -100,6 +102,19 @@ class Sevensegment:
             self.seg.text = txt[i:i + width]
             sleep(delay)
 
+    def mostrar(self, txt):
+        """
+        Muestra un texto fijo en la pantalla sin ninguna animación. En caso de
+        ser superior a la cantidad de dígitos entre todas las pantallas en
+        cascada, no se mostrará el mensaje.
+        :param txt: Mensaje a mostrar por la pantalla
+        """
+        if len(txt) <= (8 * self.cascaded):
+            self.seg.text = txt.upper()
+        else:
+            print('Supera la longitud')
+
+
 ss = Sevensegment()
 
 ss.fecha()
@@ -113,4 +128,7 @@ ss.mostrarMensajeFlotante('HOLA ESTO ES UN MENSAJE CON UNA LONGITUD SUPERIOR '
 sleep(2)
 
 ss.mostrarMensajeFlotante2('PRUEBA')
+sleep(2)
+
+ss.mostrar('HOLA')
 sleep(2)
