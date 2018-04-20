@@ -44,9 +44,9 @@ sleep = time.sleep
 
 class Sevensegment:
 
-    def __init__(self):
-        self.serial = spi(port=0, device=0, gpio=noop())
-        self.device = max7219(self.serial, cascaded=1)
+    def __init__(self, c=1, p=0, d=0):
+        self.serial = spi(port=p, device=d, gpio=noop())
+        self.device = max7219(self.serial, cascaded=c)
         self.seg = sevensegment(self.device)
 
     def fecha(self):
@@ -63,6 +63,27 @@ class Sevensegment:
         hora_actual = datetime.now().strftime('%H-%M-%S')
         self.seg.text = hora_actual
 
+    def mostrarMensajeFlotante(self, txt, delay=1):
+        """
+        Muestra un mensaje como animación recorriendo la pantalla de forma que
+        entra por la derecha y sale por la izquierda, útil cuando no cabe al
+        completo el texto por ser un mensaje largo conviertiéndolo previamente
+        a mayúsculas.
+        :param txt: Texto a mostrar por la pantalla
+        :param delay: Tiempo entre carácteres para desplazar el mensaje
+        """
+        width = self.device.width
+        padding = " " * width
+        txt = padding + txt.upper() + padding
+        n = len(txt)
+
+        print("Mostrando mensaje:\n"+txt)
+
+        virtual = viewport(self.device, width=n, height=8)
+        sevensegment(virtual).text = txt
+        for i in reversed(list(range(n - width))):
+            virtual.set_position((i, 0))
+            time.sleep(delay)
 
 ss = Sevensegment()
 
@@ -72,3 +93,6 @@ sleep(2)
 ss.hora()
 sleep(2)
 
+ss.mostrarMensajeFlotante('HOLA ESTO ES UN MENSAJE CON UNA LONGITUD SUPERIOR '
+                          'AL DE LA PANTALLA')
+sleep(2)
