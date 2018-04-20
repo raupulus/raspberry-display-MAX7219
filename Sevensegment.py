@@ -42,7 +42,25 @@ sleep = time.sleep
 #######################################
 
 
-def mifuncion():
-    pass
+class Sevensegment:
+
+    def __init__(self):
+        self.serial = spi(port=0, device=0, gpio=noop())
+        self.device = max7219(self.serial, cascaded=1)
+        self.seg = sevensegment(self.device)
+
+    def fecha(self):
+        """
+        Muestra la fecha actual en el dispositivo
+        """
+        fecha_ahora = datetime.now()
+        print(self.seg)
+        self.seg.text = fecha_ahora.strftime("%d-%m-%y")
+
+
+ss = Sevensegment()
+ss.fecha()
+
+sleep(10)
 
 
