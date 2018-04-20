@@ -83,7 +83,22 @@ class Sevensegment:
         sevensegment(virtual).text = txt
         for i in reversed(list(range(n - width))):
             virtual.set_position((i, 0))
-            time.sleep(delay)
+            sleep(delay)
+
+    def mostrarMensajeFlotante2(self, txt, delay=1):
+        """
+        Muestra el mensaje flotante pero cortando la cadena por si misma,
+        similar al anterior
+        :param txt: El texto a mostrar por la pantalla
+        :param delay: Tiempo entre iteraciones
+        """
+        width = self.seg.device.width
+        padding = " " * width
+        txt = padding + txt.upper() + padding
+
+        for i in range(len(txt)):
+            self.seg.text = txt[i:i + width]
+            sleep(delay)
 
 ss = Sevensegment()
 
@@ -95,4 +110,7 @@ sleep(2)
 
 ss.mostrarMensajeFlotante('HOLA ESTO ES UN MENSAJE CON UNA LONGITUD SUPERIOR '
                           'AL DE LA PANTALLA')
+sleep(2)
+
+ss.mostrarMensajeFlotante2('PRUEBA')
 sleep(2)
