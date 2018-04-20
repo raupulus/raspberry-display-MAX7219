@@ -15,6 +15,9 @@
 #######################################
 # #           Descripción           # #
 #######################################
+# Esta clase crea un nuevo objeto al que se puede acceder para controlar la
+# pantalla de 7 segmentos, 8 dígitos con el chip MAX7219 mediante los métodos
+# aquí definidos simplificando el trabajo y haciéndolo más accesible.
 
 #######################################
 # #       Importar Librerías        # #
@@ -29,14 +32,13 @@ from luma.led_matrix.device import max7219
 from luma.core.interface.serial import spi, noop
 from luma.core.virtual import viewport, sevensegment
 
-
 #######################################
 # #             Variables           # #
 #######################################
 sleep = time.sleep
 
 #######################################
-# #             Funciones           # #
+# #               CLASE             # #
 #######################################
 
 
@@ -130,32 +132,3 @@ class Sevensegment:
             self.seg.device.contrast(n * 16)
         else:
             print('Valor de Brillo indicado no correcto, solo del 0-15')
-
-
-# Pruebas de la clase
-ss = Sevensegment()
-
-ss.fecha()
-sleep(2)
-
-ss.hora()
-sleep(2)
-
-ss.mostrarMensajeFlotante('HOLA ESTO ES UN MENSAJE CON UNA LONGITUD SUPERIOR '
-                          'AL DE LA PANTALLA')
-sleep(2)
-
-ss.mostrarMensajeFlotante2('PRUEBA')
-sleep(2)
-
-ss.mostrar('HOLA')
-sleep(2)
-
-ss.brillo(0)
-sleep(1)
-ss.brillo(5)
-sleep(1)
-ss.brillo(10)
-sleep(1)
-ss.brillo(15)
-sleep(1)
