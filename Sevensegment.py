@@ -53,14 +53,22 @@ class Sevensegment:
         """
         Muestra la fecha actual en el dispositivo
         """
-        fecha_ahora = datetime.now()
-        print(self.seg)
-        self.seg.text = fecha_ahora.strftime("%d-%m-%y")
+        fecha_ahora = datetime.now().strftime('%d-%m-%y')
+        self.seg.text = fecha_ahora
+
+    def hora(self):
+        """
+        Muestra la hora actual
+        """
+        hora_actual = datetime.now().strftime('%H-%M-%S')
+        self.seg.text = hora_actual
 
 
 ss = Sevensegment()
+
 ss.fecha()
+sleep(2)
 
-sleep(10)
-
+ss.hora()
+sleep(2)
 
