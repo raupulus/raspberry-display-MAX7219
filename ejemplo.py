@@ -26,23 +26,34 @@ from time import sleep
 #######################################
 # #              SCRIPT             # #
 #######################################
+
+# Instancio la clase, sin parámetros
 ss = Sevensegment()
 
+# Ejemplo si tuviese dos pantallas en cascada
+#ss = Sevensegment(c=2)
+
+# Muestro la fecha
 ss.fecha()
 sleep(2)
 
+# Muestro la hora
 ss.hora()
 sleep(2)
 
+# Muestro un mensaje que entra por la derecha y sale por la izquierda
 ss.mostrarMensajeFlotante('HOLA ESTO ES UN MENSAJE Largo', 0.4)
 sleep(2)
 
+# Muestro otro mensaje similar al anterior
 ss.mostrarMensajeFlotante2('PRUEBA')
 sleep(2)
 
+# Muestro un mensaje fijo
 ss.mostrar('HOLA')
 sleep(2)
 
+# Cambio a distintas opciones de brillo
 ss.brillo(0)
 sleep(1)
 ss.brillo(5)
