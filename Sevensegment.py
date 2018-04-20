@@ -45,6 +45,13 @@ sleep = time.sleep
 class Sevensegment:
 
     def __init__(self, c=1, p=0, d=0):
+        """
+        Constructor de la clase para crear un nuevo objeto display de 7
+        segmentos con métodos fácilmente accesibles y opcionales.
+        :param c: Cantidad de dispositivos en cascada.
+        :param p: Puerto del dispositivo.
+        :param d: Dispositivo.
+        """
         self.cascaded = c  # Cantidad de dispositivos en cascada
 
         self.serial = spi(port=p, device=d, gpio=noop())
