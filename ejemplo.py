@@ -15,6 +15,7 @@
 #######################################
 # #           Descripción           # #
 #######################################
+# Este script tiene como función mostrar ejemplos básicos de uso.
 
 #######################################
 # #       Importar Librerías        # #
@@ -23,7 +24,7 @@ from Sevensegment import  Sevensegment
 from time import sleep
 
 #######################################
-# #             Variables           # #
+# #              SCRIPT             # #
 #######################################
 ss = Sevensegment()
 
