@@ -65,18 +65,12 @@ izquierda
 Los pines para una Raspberry PI con este tipo de display sigue este esquema:
 
 |   Board Pin  |     Name     |    Remarks   |    RPi Pin   | RPi Function |
-|______________|______________|______________|______________|______________|
-|      ?       |     VCC      |   +5V Power  |      4       |     5V0      |
-|      ?       |     GND      |    Ground    |      6       |     GND      |
+| :----------: | :----------: | :----------: | :----------: | :----------: |
+|      4       |     VCC      |   +5V Power  |      -       |     5V0      |
+|      6       |     GND      |    Ground    |      -       |     GND      |
 |      19      |     DIN      |    Data In   |      10      |    MOSI      |
 |      24      |     CS       |  Chip Select |      8       |   SPI CE0    |
 |      23      |     CLK      |     Clock    |      11      |   SPI CLK    |
-
-
-2 	GND 	Ground 	6 	GND
-3 	DIN 	Data In 	19 	GPIO 10 (MOSI)
-4 	CS 	Chip Select 	24 	GPIO 8 (SPI CE0)
-5 	CLK 	Clock 	23 	GPIO 11 (SPI CLK)
 
 
 ## Librería usada
